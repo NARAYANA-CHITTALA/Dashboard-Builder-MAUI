@@ -159,5 +159,5 @@ MIT License — Free to use and extend
 ## 💬 Contact
 
 * Created by: \[Narayana Chittala]
-* Email: \[[your@email.com](mailto:narayanachittala007@email.com)]
+* Email: \[[narayanachittala007@gmail.com](mailto:narayanachittala007@gmail.com)]
 
