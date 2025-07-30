@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GamanaDashBoardApp.Views.Dashboard"
+             Title="Dashboard"
+             BackgroundColor="Black">
+
+    <Grid ColumnSpacing="10" RowSpacing="0" Padding="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*" />
+            <!-- Main Dashboard -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <VerticalStackLayout Grid.Column="0"
+                     BackgroundColor="#1e1e1e"
+                     Padding="10"
+                     Spacing="10">
+            <Label Text="Widgets"
+           TextColor="White"
+           FontSize="18"
+           FontAttributes="Bold" />
+
+            <Frame BackgroundColor="Gray" CornerRadius="8" Padding="5" Margin="0,5">
+                <Label Text="Line Chart" TextColor="White" />
+                <Frame.GestureRecognizers>
+                    <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame BackgroundColor="Gray" CornerRadius="8" Padding="5" Margin="0,5">
+                <Label Text="Bar Chart" TextColor="White" />
+                <Frame.GestureRecognizers>
+                    <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame BackgroundColor="Gray" CornerRadius="8" Padding="5" Margin="0,5">
+                <Label Text="Data Grid" TextColor="White" />
+                <Frame.GestureRecognizers>
+                    <DragGestureRecognizer CanDrag="True" DragStarting="OnDragStarting" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Column="1" RowSpacing="2" ColumnSpacing="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Picker x:Name="LayoutPicker"
+                    Title="Select Layout"
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                    HorizontalOptions="Fill"
+                    Margin="0,0,0,10" >
+                <Picker.Items>
+                    <x:String>2x2</x:String>
+                    <x:String>3x3</x:String>
+                    <x:String>4x4</x:String>
+                    <x:String>4x3</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Grid x:Name="DynamicGrid"
+                  Grid.Row="1"
+                  BackgroundColor="Black"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand" />
+        </Grid>
+    </Grid>
+</ContentPage>

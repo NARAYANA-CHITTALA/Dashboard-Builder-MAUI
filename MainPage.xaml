@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             x:Class="GamanaDashBoardApp.MainPage"
+             BackgroundColor="WhiteSmoke">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Orientation="Horizontal" Padding="10" Spacing="10" Grid.Row="0" BackgroundColor="#F5F5F5">
+            <Label Text="Layout:" VerticalOptions="Center"/>
+            <Picker x:Name="LayoutPicker" ItemsSource="{Binding LayoutFiles}" SelectedItem="{Binding SelectedLayoutFile, Mode=TwoWay}" WidthRequest="180"/>
+            <Button x:Name="EditLayoutButton" Text="Edit" />
+            <Button x:Name="SaveLayoutButton" Text="Save" />
+            <StackLayout x:Name="StepperPanel" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" IsVisible="False">
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <Label Text="Width:" VerticalOptions="Center" />
+                    <Stepper x:Name="WidthStepper" Minimum="200" Maximum="1000" Increment="10" ValueChanged="OnWidthStepperChanged" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <Label Text="Height:" VerticalOptions="Center" />
+                    <Stepper x:Name="HeightStepper" Minimum="200" Maximum="1000" Increment="10" ValueChanged="OnHeightStepperChanged" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+
+        <Grid Grid.Row="1" Padding="10">
+            <ActivityIndicator x:Name="LoadingIndicator" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="60" WidthRequest="60"/>
+
+            <AbsoluteLayout x:Name="DashboardLayout">
+                <Frame x:Name="BarChartFrame" Padding="10" CornerRadius="10" HasShadow="True" AbsoluteLayout.LayoutBounds="0.05,0.05,0.4,0.4" AbsoluteLayout.LayoutFlags="All">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="Top 10 Cryptocurrencies by Market Cap" Grid.Row="0" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <chart:SfCartesianChart Grid.Row="1" x:Name="BarChart">
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:CategoryAxis/>
+                            </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis/>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:ColumnSeries ItemsSource="{Binding BarChartData}" XBindingPath="Name" YBindingPath="MarketCap" />
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Frame>
+
+                <Frame x:Name="LineChartFrame" Padding="10" CornerRadius="10" HasShadow="True" AbsoluteLayout.LayoutBounds="0.95,0.05,0.4,0.4" AbsoluteLayout.LayoutFlags="All">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="7-Day Price History (Top Coin)" Grid.Row="0" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <chart:SfCartesianChart Grid.Row="1" x:Name="LineChart">
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:CategoryAxis/>
+                            </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis/>
+                            </chart:SfCartesianChart.YAxes>
+                            <chart:LineSeries ItemsSource="{Binding LineChartData}" XBindingPath="Time" YBindingPath="Price" />
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Frame>
+
+                <Frame x:Name="DataGridFrame" Padding="10" CornerRadius="10" HasShadow="True" AbsoluteLayout.LayoutBounds="0.5,0.95,0.9,0.5" AbsoluteLayout.LayoutFlags="All">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="Top 10 Coins - Market Data" Grid.Row="0" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <datagrid:SfDataGrid Grid.Row="1" x:Name="DataGrid"
+                                             ItemsSource="{Binding GridData}"
+                                             AutoGenerateColumnsMode="None">
+                            <datagrid:SfDataGrid.Columns>
+                                <datagrid:DataGridImageColumn MappingName="Image" HeaderText="Logo" Width="70"/>
+                                <datagrid:DataGridTextColumn MappingName="Name" HeaderText="Name" />
+                                <datagrid:DataGridTextColumn MappingName="Symbol" HeaderText="Symbol" />
+                                <datagrid:DataGridTextColumn MappingName="CurrentPrice" HeaderText="Price" Format="C"/>
+                                <datagrid:DataGridTextColumn MappingName="PriceChangePercentage24h" HeaderText="24h %" Format="F2"/>
+                                <datagrid:DataGridTextColumn MappingName="MarketCap" HeaderText="Market Cap" Format="C0"/>
+                            </datagrid:SfDataGrid.Columns>
+                        </datagrid:SfDataGrid>
+                    </Grid>
+                </Frame>
+            </AbsoluteLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
+
