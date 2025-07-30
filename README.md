@@ -158,6 +158,6 @@ MIT License — Free to use and extend
 
 ## 💬 Contact
 
-* Created by: \[Narayana Chittala]
-* Email: \[[narayanachittala007@gmail.com](mailto:narayanachittala007@gmail.com)]
+* Created by: Narayana Chittala
+* Email: [narayanachittala007@gmail.com](mailto:narayanachittala007@gmail.com)
 
